@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .car-container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; }
+        .car-image { width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <div class="car-container">
+        <h2 id="car-title"></h2>
+        <img id="car-image" class="car-image" src="" alt="Car Image">
+        <p><strong>Year:</strong> <span id="car-year"></span></p>
+        <p><strong>Color:</strong> <span id="car-color"></span></p>
+        <p><strong>Mileage:</strong> <span id="car-mileage"></span> miles</p>
+        <p><strong>Price:</strong> $<span id="car-price"></span></p>
+        <p><strong>Fuel Type:</strong> <span id="car-fuel"></span></p>
+        <p><strong>Transmission:</strong> <span id="car-transmission"></span></p>
+        <p><strong>Engine:</strong> <span id="car-engine"></span></p>
+        <p><strong>Horsepower:</strong> <span id="car-horsepower"></span> HP</p>
+        <p><strong>Owners:</strong> <span id="car-owners"></span></p>
+        <p><strong>Features:</strong> <span id="car-features"></span></p>
+    </div>
+
+    <script>
+        async function fetchCarDetails() {
+            try {
+                const response = await fetch('https://freetestapi.com/api/v1/cars/1');
+                const car = await response.json();
+
+                document.getElementById('car-title').textContent = `${car.make} ${car.model}`;
+                document.getElementById('car-image').src = car.image;
+                document.getElementById('car-year').textContent = car.year;
+                document.getElementById('car-color').textContent = car.color;
+                document.getElementById('car-mileage').textContent = car.mileage;
+                document.getElementById('car-price').textContent = car.price;
+                document.getElementById('car-fuel').textContent = car.fuelType;
+                document.getElementById('car-transmission').textContent = car.transmission;
+                document.getElementById('car-engine').textContent = car.engine;
+                document.getElementById('car-horsepower').textContent = car.horsepower;
+                document.getElementById('car-owners').textContent = car.owners;
+                document.getElementById('car-features').textContent = car.features.join(', ');
+            } catch (error) {
+                console.error('Error fetching car details:', error);
+            }
+        }
+
+        fetchCarDetails();
+    </script>
+</body>
+</html>
